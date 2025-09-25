@@ -119,6 +119,16 @@ if upload_file is not None:
 #Reads the file and encodes it
     file_bytes = upload_file.read()
     encoded_image = base64.b64encode(file_bytes).decode()
+    
+    # Detect image format from file extension
+    file_extension = upload_file.name.lower().split('.')[-1]
+    if file_extension in ['jpg', 'jpeg']:
+        media_type = "image/jpeg"
+    elif file_extension == 'png':
+        media_type = "image/png"
+    else:
+        # Default to jpeg for unknown formats
+        media_type = "image/jpeg"
 #Creates the JSON metadata based on the options selected by the user
     json_text = {
     "make": selected,
@@ -163,7 +173,7 @@ if upload_file is not None:
             "type": "image",
             "source": {
               "type": "base64",
-              "media_type": "image/png",
+              "media_type": media_type,
               "data": encoded_image
             }
           },
