@@ -5,9 +5,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     curl \
-    software-properties-common \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
+    && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 
